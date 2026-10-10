@@ -1,0 +1,1342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>A Birthday Letter</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&family=Cormorant+Garamond:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+
+/* =========================
+   GENERAL
+========================= */
+
+* {
+    box-sizing: border-box;
+}
+
+:root {
+    --paper: #ead0a1;
+    --paper2: #f5dfb6;
+    --ink: #3b2118;
+    --red: #7b0d16;
+    --deep: #170907;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    background: #120807;
+    color: var(--ink);
+    font-family: "Cormorant Garamond", serif;
+}
+
+button,
+input {
+    font: inherit;
+}
+
+.page {
+    display: none;
+    min-height: 100vh;
+    padding: 28px 18px;
+    position: relative;
+    overflow: hidden;
+}
+
+.page.active {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+/* =========================
+   PARCHMENT
+========================= */
+
+.paper {
+    width: min(900px, 94vw);
+    min-height: min(720px, 92vh);
+
+    padding: 54px 55px;
+
+    position: relative;
+
+    background:
+        radial-gradient(
+            circle at 20% 20%,
+            #fff0c7aa 0 2%,
+            transparent 22%
+        ),
+        radial-gradient(
+            circle at 80% 80%,
+            #8b531522 0 2%,
+            transparent 25%
+        ),
+        linear-gradient(
+            90deg,
+            #d8b57d,
+            #f1d6a5 8%,
+            #f5dfb6 50%,
+            #e2c18c 92%,
+            #c79e68
+        );
+
+    box-shadow:
+        0 15px 50px #000b,
+        inset 0 0 35px #70451f55;
+
+    clip-path: polygon(
+        1% 2%,
+        8% 3%,
+        15% 1%,
+        25% 3%,
+        34% 1%,
+        44% 3%,
+        54% 1%,
+        64% 3%,
+        75% 1%,
+        86% 3%,
+        99% 1%,
+        98% 12%,
+        100% 22%,
+        98% 34%,
+        100% 46%,
+        98% 60%,
+        100% 74%,
+        98% 87%,
+        99% 99%,
+        87% 97%,
+        75% 100%,
+        63% 97%,
+        50% 100%,
+        38% 97%,
+        25% 99%,
+        13% 97%,
+        1% 99%,
+        2% 86%,
+        0 74%,
+        2% 61%,
+        0 48%,
+        2% 35%,
+        0 22%,
+        2% 11%
+    );
+}
+
+
+/* =========================
+   TYPOGRAPHY
+========================= */
+
+h1,
+h2 {
+    font-family: "Dancing Script", cursive;
+    margin: 0 0 18px;
+    text-align: center;
+    font-weight: 600;
+}
+
+h1 {
+    font-size: clamp(42px, 7vw, 72px);
+}
+
+h2 {
+    font-size: clamp(36px, 6vw, 58px);
+}
+
+p {
+    font-size: 22px;
+    line-height: 1.45;
+}
+
+.center {
+    text-align: center;
+}
+
+.muted {
+    opacity: 0.75;
+}
+
+
+/* =========================
+   BUTTONS
+========================= */
+
+.btn {
+    border: 0;
+    border-radius: 9px;
+
+    background: linear-gradient(
+        #9c1d27,
+        #650710
+    );
+
+    color: #fff4dc;
+
+    padding: 12px 27px;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 5px 12px #3a000077;
+
+    font-family: "Dancing Script", cursive;
+    font-size: 23px;
+
+    transition: 0.2s ease;
+}
+
+.btn:hover {
+    transform: translateY(-1px);
+    filter: brightness(1.08);
+}
+
+
+/* =========================
+   LOGIN PAGE
+========================= */
+
+#loginPage {
+    background:
+        radial-gradient(
+            circle at center,
+            #402017,
+            #110807 65%
+        );
+}
+
+.loginbox {
+    width: min(430px, 92vw);
+
+    padding: 48px 42px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #e8c58f,
+            #f4ddb2,
+            #c99f6d
+        );
+
+    box-shadow:
+        0 20px 70px #000c;
+
+    text-align: center;
+}
+
+.loginbox input {
+    display: block;
+
+    width: 100%;
+
+    margin: 13px 0;
+
+    padding: 13px 15px;
+
+    border: 1px solid #81582f;
+
+    background: #f7e4bdcc;
+
+    border-radius: 6px;
+
+    color: var(--ink);
+
+    font-size: 18px;
+}
+
+#error {
+    color: #7b0d16;
+    min-height: 22px;
+}
+
+
+/* =========================
+   HOME PAGE
+   BOUQUET + LETTER
+   SINGLE IMAGE BUTTON
+========================= */
+
+#homePage {
+    background:
+        radial-gradient(
+            circle at 50% 38%,
+            #5d1714 0 4%,
+            transparent 14%
+        ),
+        radial-gradient(
+            circle at 43% 34%,
+            #a52224 0 3%,
+            transparent 12%
+        ),
+        radial-gradient(
+            circle at 57% 33%,
+            #9b1d22 0 3%,
+            transparent 12%
+        ),
+        radial-gradient(
+            circle at 50% 40%,
+            #2a0907 0 22%,
+            transparent 38%
+        ),
+        linear-gradient(
+            135deg,
+            #32120b,
+            #0d0605 60%,
+            #2b100b
+        );
+}
+
+.homeContent {
+    text-align: center;
+    position: relative;
+    z-index: 2;
+}
+
+
+/*
+   The entire bouquet + envelope image
+   is now one single button.
+*/
+
+.bouquetLetterButton {
+    display: block;
+
+    border: 0;
+
+    padding: 0;
+
+    margin: 0 auto;
+
+    background: transparent;
+
+    cursor: pointer;
+
+    width: min(760px, 90vw);
+
+    transition:
+        transform 0.3s ease,
+        filter 0.3s ease;
+}
+
+.bouquetLetterButton img {
+    display: block;
+
+    width: 100%;
+
+    height: auto;
+
+    border-radius: 4px;
+
+    filter:
+        drop-shadow(
+            0 18px 25px #000b
+        );
+}
+
+.bouquetLetterButton:hover {
+    transform: scale(1.025);
+
+    filter: brightness(1.08);
+}
+
+.bouquetLetterButton:active {
+    transform: scale(0.99);
+}
+
+.openingText {
+    margin-top: 15px;
+
+    color: #f1d4a1;
+
+    font-family:
+        "Dancing Script",
+        cursive;
+
+    font-size: 26px;
+
+    text-shadow:
+        0 2px 5px #000;
+}
+
+
+/* =========================
+   CHOICE PAGE
+========================= */
+
+.choice-grid {
+    display: flex;
+
+    gap: 70px;
+
+    justify-content: center;
+
+    align-items: center;
+
+    flex-wrap: wrap;
+
+    margin: 45px 0;
+}
+
+.choice {
+    width: 220px;
+    height: 210px;
+
+    border: 0;
+
+    background: transparent;
+
+    cursor: pointer;
+
+    color: var(--ink);
+}
+
+.icon {
+    height: 145px;
+
+    display: grid;
+
+    place-items: center;
+
+    font-size: 105px;
+
+    filter:
+        drop-shadow(
+            0 5px 5px #4b271855
+        );
+}
+
+.choice span {
+    font-family:
+        "Dancing Script",
+        cursive;
+
+    font-size: 29px;
+}
+
+
+/* =========================
+   MEMORIES PAGE
+========================= */
+
+.memory-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(5, 1fr);
+
+    gap: 14px;
+
+    margin: 25px 0;
+}
+
+.memory {
+    background: #d2ad76;
+
+    padding: 7px;
+
+    box-shadow:
+        0 4px 9px #4b2a1244;
+}
+
+.memory img,
+.memory video {
+    width: 100%;
+
+    aspect-ratio: 1 / 1;
+
+    object-fit: cover;
+
+    display: block;
+}
+
+.memory figcaption {
+    text-align: center;
+
+    font-family:
+        "Dancing Script",
+        cursive;
+
+    font-size: 18px;
+
+    padding: 5px;
+}
+
+
+/* =========================
+   MUSIC PAGE
+========================= */
+
+.audio-wrap {
+    text-align: center;
+
+    margin: 30px 0;
+}
+
+.record {
+    width: 170px;
+
+    height: 170px;
+
+    border-radius: 50%;
+
+    margin:
+        10px auto 25px;
+
+    background:
+        repeating-radial-gradient(
+            circle,
+            #111 0 5px,
+            #242424 6px 8px
+        );
+
+    border: 12px solid #151515;
+
+    display: grid;
+
+    place-items: center;
+
+    box-shadow:
+        0 10px 25px #0008;
+}
+
+.record:after {
+    content: "";
+
+    width: 44px;
+
+    height: 44px;
+
+    border-radius: 50%;
+
+    background: #c48d46;
+
+    border: 8px solid #4c2b1c;
+}
+
+audio {
+    width: min(600px, 90%);
+}
+
+.lyrics {
+    white-space: pre-line;
+
+    font-size: 20px;
+
+    line-height: 1.55;
+
+    max-height: 300px;
+
+    overflow: auto;
+
+    margin: 25px auto;
+
+    width: min(650px, 95%);
+
+    text-align: center;
+}
+
+.small {
+    font-size: 16px;
+}
+
+.footerbtn {
+    margin-top: 22px;
+}
+
+
+/* =========================
+   FALLING ROSE PETALS
+========================= */
+
+.petal {
+    position: fixed;
+
+    top: -30px;
+
+    font-size: 25px;
+
+    animation:
+        fall linear infinite;
+
+    opacity: 0.8;
+
+    z-index: 5;
+
+    pointer-events: none;
+}
+
+@keyframes fall {
+
+    to {
+        transform:
+            translateY(110vh)
+            rotate(540deg);
+    }
+
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 700px) {
+
+    .paper {
+        padding: 38px 22px;
+
+        min-height: 92vh;
+    }
+
+    .memory-grid {
+        grid-template-columns:
+            repeat(2, 1fr);
+
+        gap: 10px;
+    }
+
+    .choice-grid {
+        gap: 25px;
+    }
+
+    .choice {
+        width: 170px;
+    }
+
+    .icon {
+        font-size: 80px;
+    }
+
+    p {
+        font-size: 19px;
+    }
+
+    .loginbox {
+        padding: 35px 25px;
+    }
+
+    .bouquetLetterButton {
+        width: 94vw;
+    }
+
+    .openingText {
+        font-size: 23px;
+    }
+
+}
+
+</style>
+</head>
+
+
+<body>
+
+
+<!-- ==================================================
+     LOGIN PAGE
+================================================== -->
+
+<div id="loginPage" class="page active">
+
+    <div class="loginbox">
+
+        <h1>Welcome</h1>
+
+        <p>
+            There is a little surprise waiting for you.
+        </p>
+
+        <input
+            id="username"
+            placeholder="Username"
+            autocomplete="off"
+        >
+
+        <input
+            id="password"
+            type="password"
+            placeholder="Password"
+        >
+
+        <button
+            class="btn"
+            onclick="login()"
+        >
+            Open
+        </button>
+
+        <div id="error"></div>
+
+
+    </div>
+
+</div>
+
+
+
+<!-- ==================================================
+     HOME PAGE
+     BOUQUET + ENVELOPE = ONE IMAGE BUTTON
+================================================== -->
+
+<div id="homePage" class="page">
+
+    <div class="homeContent">
+
+        <button
+            class="bouquetLetterButton"
+            onclick="show('letterPage')"
+        >
+
+            <img
+                src="bouquet-letter.png"
+                alt="Open your birthday letter"
+            >
+
+        </button>
+
+
+        <div class="openingText">
+            Click the letter to open
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<!-- ==================================================
+     BIRTHDAY LETTER
+================================================== -->
+
+<div id="letterPage" class="page">
+
+    <div class="paper">
+
+        <h1>
+            Happy Birthday
+        </h1>
+
+
+        <p>
+            Dear Aarohi,
+        </p>
+
+
+        <p>
+            Happy birthday. I hope today gives you a
+            reason to smile a little more than usual.
+        </p>
+
+
+        <p>
+            Thank you for being the person you are
+            for the conversations, the laughs, the
+            memories, and all the little moments that
+            somehow end up meaning the most.
+        </p>
+
+
+        <p>
+            I hope this next year brings you good
+            people, good days, new adventures, and
+            plenty of reasons to be proud of yourself.
+        </p>
+
+
+        <p>
+            There is more waiting for you on the
+            next page.
+        </p>
+
+
+        <p
+            class="center"
+            style="
+                font-family:'Dancing Script';
+                font-size:30px;
+            "
+        >
+            Happy Birthday, always. ♥
+        </p>
+
+
+        <div class="center footerbtn">
+
+            <button
+                class="btn"
+                onclick="show('choicePage')"
+            >
+                Go to next page →
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<!-- ==================================================
+     CAMERA / GRAMOPHONE CHOICE PAGE
+================================================== -->
+
+<div id="choicePage" class="page">
+
+    <div class="paper">
+
+        <h2>
+            A Few More Things
+        </h2>
+
+
+        <p class="center">
+            Choose what you want to open.
+        </p>
+
+
+        <div class="choice-grid">
+
+
+            <!-- CAMERA -->
+
+            <button
+                class="choice"
+                onclick="show('memoriesPage')"
+            >
+
+                <div class="icon">
+                    📷
+                </div>
+
+                <span>
+                    Memories
+                </span>
+
+            </button>
+
+
+
+            <!-- GRAMOPHONE -->
+
+            <button
+                class="choice"
+                onclick="playMusicPage()"
+            >
+
+                <div class="icon">
+                    📻
+                </div>
+
+                <span>
+                    Our Song
+                </span>
+
+            </button>
+
+
+        </div>
+
+
+        <div class="center">
+
+            <button
+                class="btn"
+                onclick="show('letterPage')"
+            >
+                ← Back to letter
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<!-- ==================================================
+     MEMORIES PAGE
+================================================== -->
+
+<div id="memoriesPage" class="page">
+
+    <div class="paper">
+
+        <h2>
+            Memories
+        </h2>
+
+
+        <p class="center">
+            Ten little pieces of time worth keeping.
+        </p>
+
+
+        <div class="memory-grid">
+
+
+            <figure class="memory">
+
+                <img
+                    src="memory01.jpg"
+                    alt="Memory 1"
+                >
+
+                <figcaption>
+                    Memory 1
+                </figcaption>
+
+            </figure>
+
+
+            <figure class="memory">
+
+                <img
+                    src="memory02.jpg"
+                    alt="Memory 2"
+                >
+
+                <figcaption>
+                    Memory 2
+                </figcaption>
+
+            </figure>
+
+
+            <figure class="memory">
+
+                <img
+                    src="memory03.jpg"
+                    alt="Memory 3"
+                >
+
+                <figcaption>
+                    Memory 3
+                </figcaption>
+
+            </figure>
+
+
+            <figure class="memory">
+
+                <img
+                    src="memory04.jpg"
+                    alt="Memory 4"
+                >
+
+                <figcaption>
+                    Memory 4
+                </figcaption>
+
+            </figure>
+
+
+            <figure class="memory">
+
+                <img
+                    src="memory05.jpg"
+                    alt="Memory 5"
+                >
+
+                <figcaption>
+                    Memory 5
+                </figcaption>
+
+            </figure>
+
+
+            <figure class="memory">
+
+                <img
+                    src="memory06.jpg"
+                    alt="Memory 6"
+                >
+
+                <figcaption>
+                    Memory 6
+                </figcaption>
+
+            </figure>
+
+
+            <figure class="memory">
+
+                <img
+                    src="memory07.jpg"
+                    alt="Memory 7"
+                >
+
+                <figcaption>
+                    Memory 7
+                </figcaption>
+
+            </figure>
+
+
+            <figure class="memory">
+
+                <img
+                    src="memory08.jpg"
+                    alt="Memory 8"
+                >
+
+                <figcaption>
+                    Memory 8
+                </figcaption>
+
+            </figure>
+
+
+            <figure class="memory">
+
+                <img
+                    src="memory09.jpg"
+                    alt="Memory 9"
+                >
+
+                <figcaption>
+                    Memory 9
+                </figcaption>
+
+            </figure>
+
+
+            <figure class="memory">
+
+                <img
+                    src="memory10.jpg"
+                    alt="Memory 10"
+                >
+
+                <figcaption>
+                    Memory 10
+                </figcaption>
+
+            </figure>
+
+
+        </div>
+
+        <div class="center footerbtn">
+
+            <button
+                class="btn"
+                onclick="show('letterPage')"
+            >
+                ← Go to letter
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<!-- ==================================================
+     MUSIC PAGE
+================================================== -->
+
+<div id="musicPage" class="page">
+
+    <div class="paper">
+
+        <h2>
+            U Can Count On Me
+        </h2>
+
+
+        <div class="audio-wrap">
+
+
+            <div class="record"></div>
+
+
+            <audio
+                id="song"
+                controls
+                preload="metadata"
+            >
+
+                <source
+                    src="u-can-count-on-me.mp3"
+                    type="audio/mpeg"
+                >
+
+                Your browser does not support audio.
+
+            </audio>
+
+
+        </div>
+
+
+        <div
+            class="lyrics"
+            id="lyrics"
+        >
+
+… Oh-oh-oh
+… If you ever find yourself stuck in the middle of the sea
+I'll sail the world to find you
+If you ever find yourself lost in the dark and you can't see
+I'll be the light to guide you
+… We find out what we're made of
+When we are called to help our friends in need
+… You can count on me like one, two, three, I'll be there
+And I know when I need it
+I can count on you like four, three, two and you'll be there
+'Cause that's what friends are supposed to do, oh, yeah
+… Ooh-ooh-ooh, ooh-ooh-ooh
+Yeah, yeah
+… If you're tossin' and you're turnin', and you just can't fall asleep
+I'll sing a song beside you
+And if you ever forget how much you really mean to me
+Every day, I will remind you, oh
+… We find out what we're made of
+When we are called to help our friends in need
+… You can count on me like one, two, three, I'll be there
+And I know when I need it
+I can count on you like four, three, two and you'll be there
+'Cause that's what friends are supposed to do, oh, yeah
+… Ooh-ooh-ooh, ooh-ooh-ooh
+Yeah, yeah
+… You'll always have my shoulder when you cry
+I'll never let go, never say goodbye
+… You know you can count on me like one, two, three, I'll be there
+And I know when I need it
+I can count on you like four, three, two and you'll be there
+'Cause that's what friends are supposed to do, oh, yeah
+… Ooh-ooh-ooh, ooh-ooh-ooh
+You can count on me 'cause I can count on you
+        </div>
+
+
+        <div class="center footerbtn">
+
+            <button
+                class="btn"
+                onclick="stopMusicAndHome()"
+            >
+                ⌂ Go to home
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<!-- ==================================================
+     JAVASCRIPT
+================================================== -->
+
+<script>
+
+
+/* =========================
+   LOGIN DETAILS
+========================= */
+
+const LOGIN_USER = "Aarohi";
+
+const LOGIN_PASS = "1110";
+
+
+/* =========================
+   PAGE NAVIGATION
+========================= */
+
+function show(id) {
+
+    document
+        .querySelectorAll(".page")
+        .forEach(
+            page =>
+                page.classList.remove("active")
+        );
+
+
+    document
+        .getElementById(id)
+        .classList.add("active");
+
+
+    /*
+       Stop the song whenever
+       we leave the music page.
+    */
+
+    if (id !== "musicPage") {
+
+        document
+            .getElementById("song")
+            .pause();
+
+    }
+
+
+    window.scrollTo(0, 0);
+
+}
+
+
+
+/* =========================
+   LOGIN
+========================= */
+
+function login() {
+
+    const username =
+        document
+            .getElementById("username")
+            .value
+            .trim();
+
+
+    const password =
+        document
+            .getElementById("password")
+            .value;
+
+
+    if (
+        username === LOGIN_USER &&
+        password === LOGIN_PASS
+    ) {
+
+        document
+            .getElementById("error")
+            .textContent = "";
+
+
+        show("homePage");
+
+    }
+
+    else {
+
+        document
+            .getElementById("error")
+            .textContent =
+                "That isn't the right combination.";
+
+    }
+
+}
+
+
+
+/* =========================
+   MUSIC PAGE
+========================= */
+
+function playMusicPage() {
+
+    show("musicPage");
+
+
+    const audio =
+        document
+            .getElementById("song");
+
+
+    /*
+       The browser may block
+       autoplay depending on settings.
+
+       Since this function is called
+       directly from a button click,
+       it will normally work.
+    */
+
+    audio
+        .play()
+        .catch(() => {});
+
+}
+
+
+
+/* =========================
+   RETURN HOME
+========================= */
+
+function stopMusicAndHome() {
+
+    const audio =
+        document
+            .getElementById("song");
+
+
+    audio.pause();
+
+    audio.currentTime = 0;
+
+
+    show("homePage");
+
+}
+
+
+
+/* =========================
+   FALLING ROSE PETALS
+========================= */
+
+for (
+    let i = 0;
+    i < 22;
+    i++
+) {
+
+    const petal =
+        document.createElement("div");
+
+
+    petal.className = "petal";
+
+
+    petal.textContent = "🌹";
+
+
+    petal.style.left =
+        Math.random() * 100 + "vw";
+
+
+    petal.style.animationDuration =
+        (7 + Math.random() * 9) + "s";
+
+
+    petal.style.animationDelay =
+        (-Math.random() * 12) + "s";
+
+
+    petal.style.fontSize =
+        (12 + Math.random() * 15) + "px";
+
+
+    document.body.appendChild(petal);
+
+}
+
+
+</script>
+
+</body>
+</html>
